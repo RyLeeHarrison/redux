@@ -12,11 +12,11 @@ function setup(value = 0) {
   )
 
   return {
-    component: component,
-    actions: actions,
+    component,
+    actions,
     buttons: component.find('button'),
     p: component.find('p')
-  }
+  };
 }
 
 describe('Counter component', () => {

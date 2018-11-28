@@ -15,12 +15,12 @@
       </p>
     </div>
     <script>
-      function counter(state, action) {
+      function counter(state, {type}) {
         if (typeof state === 'undefined') {
           return 0
         }
 
-        switch (action.type) {
+        switch (type) {
           case 'INCREMENT':
             return state + 1
           case 'DECREMENT':
@@ -30,8 +30,8 @@
         }
       }
 
-      var store = Redux.createStore(counter)
-      var valueEl = document.getElementById('value')
+      const store = Redux.createStore(counter);
+      const valueEl = document.getElementById('value');
 
       function render() {
         valueEl.innerHTML = store.getState().toString()
@@ -41,25 +41,25 @@
       store.subscribe(render)
 
       document.getElementById('increment')
-        .addEventListener('click', function () {
+        .addEventListener('click', () => {
           store.dispatch({ type: 'INCREMENT' })
         })
 
       document.getElementById('decrement')
-        .addEventListener('click', function () {
+        .addEventListener('click', () => {
           store.dispatch({ type: 'DECREMENT' })
         })
 
       document.getElementById('incrementIfOdd')
-        .addEventListener('click', function () {
+        .addEventListener('click', () => {
           if (store.getState() % 2 !== 0) {
             store.dispatch({ type: 'INCREMENT' })
           }
         })
 
       document.getElementById('incrementAsync')
-        .addEventListener('click', function () {
-          setTimeout(function () {
+        .addEventListener('click', () => {
+          setTimeout(() => {
             store.dispatch({ type: 'INCREMENT' })
           }, 1000)
         })

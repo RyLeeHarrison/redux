@@ -2,16 +2,16 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import ProductsList from './ProductsList'
 
-const setup = props => {
+const setup = ({title, children}) => {
   const component = shallow(
-    <ProductsList title={props.title}>{props.children}</ProductsList>
+    <ProductsList title={title}>{children}</ProductsList>
   )
 
   return {
-    component: component,
+    component,
     children: component.children().at(1),
     h3: component.find('h3')
-  }
+  };
 }
 
 describe('ProductsList component', () => {

@@ -9,6 +9,7 @@
  * (...args) => f(g(h(...args))).
  */
 
+
 export default function compose(...funcs) {
   if (funcs.length === 0) {
     return arg => arg

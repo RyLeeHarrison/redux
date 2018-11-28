@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Picker = ({ value, onChange, options }) => (
   <span>
     <h1>{value}</h1>
-    <select onChange={e => onChange(e.target.value)}
+    <select onChange={({target}) => onChange(target.value)}
             value={value}>
       {options.map(option =>
         <option value={option} key={option}>

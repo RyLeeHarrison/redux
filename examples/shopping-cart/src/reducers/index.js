@@ -7,9 +7,9 @@ export default combineReducers({
   products
 })
 
-const getAddedIds = state => fromCart.getAddedIds(state.cart)
-const getQuantity = (state, id) => fromCart.getQuantity(state.cart, id)
-const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
+const getAddedIds = ({cart}) => fromCart.getAddedIds(cart)
+const getQuantity = ({cart}, id) => fromCart.getQuantity(cart, id)
+const getProduct = ({products}, id) => fromProducts.getProduct(products, id)
 
 export const getTotal = state =>
   getAddedIds(state)

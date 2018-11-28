@@ -13,11 +13,11 @@ const setup = product => {
   )
 
   return {
-    component: component,
-    actions: actions,
+    component,
+    actions,
     button: component.find('button'),
     product: component.find(Product)
-  }
+  };
 }
 
 let productProps

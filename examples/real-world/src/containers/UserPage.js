@@ -70,10 +70,10 @@ class UserPage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, {match}) => {
   // We need to lower case the login due to the way GitHub's API behaves.
   // Have a look at ../middleware/api.js for more details.
-  const login = ownProps.match.params.login.toLowerCase()
+  const login = match.params.login.toLowerCase()
 
   const {
     pagination: { starredByUser },
@@ -82,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
   const starredPagination = starredByUser[login] || { ids: [] }
   const starredRepos = starredPagination.ids.map(id => repos[id])
-  const starredRepoOwners = starredRepos.map(repo => users[repo.owner])
+  const starredRepoOwners = starredRepos.map(({owner}) => users[owner])
 
   return {
     login,

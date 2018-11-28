@@ -18,10 +18,10 @@ export const requestPosts = subreddit => ({
   subreddit
 })
 
-export const receivePosts = (subreddit, json) => ({
+export const receivePosts = (subreddit, {data}) => ({
   type: RECEIVE_POSTS,
   subreddit,
-  posts: json.data.children.map(child => child.data),
+  posts: data.children.map(({data}) => data),
   receivedAt: Date.now()
 })
 
@@ -32,8 +32,8 @@ const fetchPosts = subreddit => dispatch => {
     .then(json => dispatch(receivePosts(subreddit, json)))
 }
 
-const shouldFetchPosts = (state, subreddit) => {
-  const posts = state.postsBySubreddit[subreddit]
+const shouldFetchPosts = ({postsBySubreddit}, subreddit) => {
+  const posts = postsBySubreddit[subreddit]
   if (!posts) {
     return true
   }

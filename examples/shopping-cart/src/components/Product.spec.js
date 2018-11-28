@@ -8,8 +8,8 @@ const setup = props => {
   )
 
   return {
-    component: component
-  }
+    component
+  };
 }
 
 describe('Product component', () => {

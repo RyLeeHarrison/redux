@@ -28,8 +28,8 @@ export default class Explore extends Component {
     this.input.value = val
   }
 
-  handleKeyUp = (e) => {
-    if (e.keyCode === 13) {
+  handleKeyUp = ({keyCode}) => {
+    if (keyCode === 13) {
       this.handleGoClick()
     }
   }

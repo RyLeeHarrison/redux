@@ -14,9 +14,9 @@ const setup = (propOverrides) => {
   const output = renderer.getRenderOutput()
 
   return {
-    props: props,
-    output: output,
-  }
+    props,
+    output,
+  };
 }
 
 describe('component', () => {

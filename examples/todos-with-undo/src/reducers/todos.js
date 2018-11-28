@@ -1,15 +1,15 @@
 import undoable, { includeAction } from 'redux-undo'
 
-const todo = (state, action) => {
-  switch (action.type) {
+const todo = (state, {type, id, text}) => {
+  switch (type) {
     case 'ADD_TODO':
       return {
-        id: action.id,
-        text: action.text,
+        id: id,
+        text: text,
         completed: false
-      }
+      };
     case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
+      if (state.id !== id) {
         return state
       }
 

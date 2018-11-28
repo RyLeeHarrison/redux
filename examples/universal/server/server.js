@@ -24,11 +24,11 @@ const compiler = webpack(webpackConfig)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
-const handleRender = (req, res) => {
+const handleRender = ({query}, res) => {
   // Query our mock API asynchronously
   fetchCounter(apiResult => {
     // Read the counter from the request, if provided
-    const params = qs.parse(req.query)
+    const params = qs.parse(query)
     const counter = parseInt(params.counter, 10) || apiResult || 0
 
     // Compile an initial state

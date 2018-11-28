@@ -9,13 +9,13 @@ const initialState = {
   quantityById: {}
 }
 
-const addedIds = (state = initialState.addedIds, action) => {
-  switch (action.type) {
+const addedIds = (state = initialState.addedIds, {type, productId}) => {
+  switch (type) {
     case ADD_TO_CART:
-      if (state.indexOf(action.productId) !== -1) {
+      if (state.includes(productId)) {
         return state
       }
-      return [ ...state, action.productId ]
+      return [ ...state, productId ];
     default:
       return state
   }

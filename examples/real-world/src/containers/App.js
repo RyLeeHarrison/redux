@@ -57,9 +57,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  errorMessage: state.errorMessage,
-  inputValue: ownProps.location.pathname.substring(1)
+const mapStateToProps = ({errorMessage}, {location}) => ({
+  errorMessage: errorMessage,
+  inputValue: location.pathname.substring(1)
 })
 
 export default withRouter(connect(mapStateToProps, {

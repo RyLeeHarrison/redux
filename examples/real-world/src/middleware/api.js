@@ -2,13 +2,13 @@ import { normalize, schema } from 'normalizr'
 import { camelizeKeys } from 'humps'
 
 // Extracts the next page URL from Github API response.
-const getNextPageUrl = response => {
-  const link = response.headers.get('link')
+const getNextPageUrl = ({headers}) => {
+  const link = headers.get('link')
   if (!link) {
     return null
   }
 
-  const nextLink = link.split(',').find(s => s.indexOf('rel="next"') > -1)
+  const nextLink = link.split(',').find(s => s.includes('rel="next"'))
   if (!nextLink) {
     return null
   }
@@ -21,7 +21,7 @@ const API_ROOT = 'https://api.github.com/'
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
 const callApi = (endpoint, schema) => {
-  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+  const fullUrl = (!endpoint.includes(API_ROOT)) ? API_ROOT + endpoint : endpoint
 
   return fetch(fullUrl)
     .then(response =>
@@ -55,13 +55,13 @@ const callApi = (endpoint, schema) => {
 // That's why we're forcing lower cases down there.
 
 const userSchema = new schema.Entity('users', {}, {
-  idAttribute: user => user.login.toLowerCase()
+  idAttribute: ({login}) => login.toLowerCase()
 })
 
 const repoSchema = new schema.Entity('repos', {
   owner: userSchema
 }, {
-  idAttribute: repo => repo.fullName.toLowerCase()
+  idAttribute: ({fullName}) => fullName.toLowerCase()
 })
 
 // Schemas for Github API responses.
@@ -117,9 +117,9 @@ export default store => next => action => {
       response,
       type: successType
     })),
-    error => next(actionWith({
+    ({message}) => next(actionWith({
       type: failureType,
-      error: error.message || 'Something bad happened'
+      error: message || 'Something bad happened'
     }))
-  )
+  );
 }

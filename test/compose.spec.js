@@ -22,9 +22,9 @@ describe('Utils', () => {
     })
 
     it('composes functions from right to left', () => {
-      const a = next => x => next(x + 'a')
-      const b = next => x => next(x + 'b')
-      const c = next => x => next(x + 'c')
+      const a = next => x => next(`${x}a`)
+      const b = next => x => next(`${x}b`)
+      const c = next => x => next(`${x}c`)
       const final = x => x
 
       expect(

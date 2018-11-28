@@ -9,10 +9,8 @@ describe('Utils', () => {
   describe('combineReducers', () => {
     it('returns a composite reducer that maps the state keys to given reducers', () => {
       const reducer = combineReducers({
-        counter: (state = 0, action) =>
-          action.type === 'increment' ? state + 1 : state,
-        stack: (state = [], action) =>
-          action.type === 'push' ? [...state, action.value] : state
+        counter: (state = 0, {type}) => type === 'increment' ? state + 1 : state,
+        stack: (state = [], {type, value}) => type === 'push' ? [...state, value] : state
       })
 
       const s1 = reducer({}, { type: 'increment' })
@@ -82,8 +80,8 @@ describe('Utils', () => {
 
     it('throws an error on first call if a reducer returns undefined initializing', () => {
       const reducer = combineReducers({
-        counter(state, action) {
-          switch (action.type) {
+        counter(state, {type}) {
+          switch (type) {
             case 'increment':
               return state + 1
             case 'decrement':
@@ -109,8 +107,8 @@ describe('Utils', () => {
       const increment = Symbol('INCREMENT')
 
       const reducer = combineReducers({
-        counter(state = 0, action) {
-          switch (action.type) {
+        counter(state = 0, {type}) {
+          switch (type) {
             case increment:
               return state + 1
             default:
@@ -144,8 +142,8 @@ describe('Utils', () => {
         child1(state = {}) {
           return state
         },
-        child2(state = { count: 0 }, action) {
-          switch (action.type) {
+        child2(state = { count: 0 }, {type}) {
+          switch (type) {
             case 'increment':
               return { count: state.count + 1 }
             default:
@@ -165,8 +163,8 @@ describe('Utils', () => {
 
     it('throws an error on first call if a reducer attempts to handle a private action', () => {
       const reducer = combineReducers({
-        counter(state, action) {
-          switch (action.type) {
+        counter(state, {type}) {
+          switch (type) {
             case 'increment':
               return state + 1
             case 'decrement':

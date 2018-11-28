@@ -20,14 +20,14 @@ function setup(id, counter, childIds, parentId) {
   )
 
   return {
-    component: component,
+    component,
     removeLink: component.findWhere(n => n.type() === 'a' && n.contains('×')),
     addLink: component.findWhere(n => n.type() === 'a' && n.contains('Add child')),
     button: component.find('button'),
     childNodes: component.find(ConnectedNode),
-    actions: actions,
-    eventArgs: eventArgs
-  }
+    actions,
+    eventArgs
+  };
 }
 
 describe('Node component', () => {

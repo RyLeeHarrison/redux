@@ -430,12 +430,12 @@ describe('createStore', () => {
   })
 
   it('handles nested dispatches gracefully', () => {
-    function foo(state = 0, action) {
-      return action.type === 'foo' ? 1 : state
+    function foo(state = 0, {type}) {
+      return type === 'foo' ? 1 : state;
     }
 
-    function bar(state = 0, action) {
-      return action.type === 'bar' ? 2 : state
+    function bar(state = 0, {type}) {
+      return type === 'bar' ? 2 : state;
     }
 
     const store = createStore(combineReducers({ foo, bar }))
@@ -628,19 +628,19 @@ describe('createStore', () => {
         const store = createStore(() => {})
         const obs = store[$$observable]()
 
-        expect(function() {
+        expect(() => {
           obs.subscribe()
         }).toThrowError(new TypeError('Expected the observer to be an object.'))
 
-        expect(function() {
+        expect(() => {
           obs.subscribe(null)
         }).toThrowError(new TypeError('Expected the observer to be an object.'))
 
-        expect(function() {
+        expect(() => {
           obs.subscribe(() => {})
         }).toThrowError(new TypeError('Expected the observer to be an object.'))
 
-        expect(function() {
+        expect(() => {
           obs.subscribe({})
         }).not.toThrow()
       })
@@ -654,12 +654,12 @@ describe('createStore', () => {
     })
 
     it('should pass an integration test with no unsubscribe', () => {
-      function foo(state = 0, action) {
-        return action.type === 'foo' ? 1 : state
+      function foo(state = 0, {type}) {
+        return type === 'foo' ? 1 : state;
       }
 
-      function bar(state = 0, action) {
-        return action.type === 'bar' ? 2 : state
+      function bar(state = 0, {type}) {
+        return type === 'bar' ? 2 : state;
       }
 
       const store = createStore(combineReducers({ foo, bar }))
@@ -683,12 +683,12 @@ describe('createStore', () => {
     })
 
     it('should pass an integration test with an unsubscribe', () => {
-      function foo(state = 0, action) {
-        return action.type === 'foo' ? 1 : state
+      function foo(state = 0, {type}) {
+        return type === 'foo' ? 1 : state;
       }
 
-      function bar(state = 0, action) {
-        return action.type === 'bar' ? 2 : state
+      function bar(state = 0, {type}) {
+        return type === 'bar' ? 2 : state;
       }
 
       const store = createStore(combineReducers({ foo, bar }))
@@ -709,12 +709,12 @@ describe('createStore', () => {
     })
 
     it('should pass an integration test with a common library (RxJS)', () => {
-      function foo(state = 0, action) {
-        return action.type === 'foo' ? 1 : state
+      function foo(state = 0, {type}) {
+        return type === 'foo' ? 1 : state;
       }
 
-      function bar(state = 0, action) {
-        return action.type === 'bar' ? 2 : state
+      function bar(state = 0, {type}) {
+        return type === 'bar' ? 2 : state;
       }
 
       const store = createStore(combineReducers({ foo, bar }))

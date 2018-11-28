@@ -13,31 +13,31 @@ function id(state = []) {
   )
 }
 
-export function todos(state = [], action) {
-  switch (action.type) {
+export function todos(state = [], {type, text}) {
+  switch (type) {
     case ADD_TODO:
       return [
         ...state,
         {
           id: id(state),
-          text: action.text
+          text: text
         }
-      ]
+      ];
     default:
       return state
   }
 }
 
-export function todosReverse(state = [], action) {
-  switch (action.type) {
+export function todosReverse(state = [], {type, text}) {
+  switch (type) {
     case ADD_TODO:
       return [
         {
           id: id(state),
-          text: action.text
+          text: text
         },
         ...state
-      ]
+      ];
     default:
       return state
   }
@@ -83,8 +83,8 @@ export function unsubscribeInTheMiddleOfReducer(state = [], action) {
   }
 }
 
-export function errorThrowingReducer(state = [], action) {
-  switch (action.type) {
+export function errorThrowingReducer(state = [], {type}) {
+  switch (type) {
     case THROW_ERROR:
       throw new Error()
     default:

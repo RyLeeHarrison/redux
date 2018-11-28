@@ -33,8 +33,8 @@ describe('bindActionCreators', () => {
   it('wraps action creators transparently', () => {
     const uniqueThis = {}
     const argArray = [1, 2, 3]
-    function actionCreator() {
-      return { type: 'UNKNOWN_ACTION', this: this, args: [...arguments] }
+    function actionCreator(...args) {
+      return { type: 'UNKNOWN_ACTION', this: this, args: [...args] };
     }
     const boundActionCreator = bindActionCreators(actionCreator, store.dispatch)
 

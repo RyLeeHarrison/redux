@@ -16,14 +16,14 @@ const setup = propOverrides => {
   const output = renderer.getRenderOutput()
 
   return {
-    props: props,
-    output: output
-  }
+    props,
+    output
+  };
 }
 
-const getTextContent = elem => {
-  const children = Array.isArray(elem.props.children) ?
-    elem.props.children : [ elem.props.children ]
+const getTextContent = ({props}) => {
+  const children = Array.isArray(props.children) ?
+    props.children : [ props.children ]
 
   return children.reduce((out, child) =>
     // Concatenate the text

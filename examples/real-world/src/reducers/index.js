@@ -4,9 +4,9 @@ import paginate from './paginate'
 import { combineReducers } from 'redux'
 
 // Updates an entity cache in response to any action with response.entities.
-const entities = (state = { users: {}, repos: {} }, action) => {
-  if (action.response && action.response.entities) {
-    return merge({}, state, action.response.entities)
+const entities = (state = { users: {}, repos: {} }, {response}) => {
+  if (response && response.entities) {
+    return merge({}, state, response.entities);
   }
 
   return state
@@ -28,7 +28,7 @@ const errorMessage = (state = null, action) => {
 // Updates the pagination data for different actions.
 const pagination = combineReducers({
   starredByUser: paginate({
-    mapActionToKey: action => action.login,
+    mapActionToKey: ({login}) => login,
     types: [
       ActionTypes.STARRED_REQUEST,
       ActionTypes.STARRED_SUCCESS,
@@ -36,7 +36,7 @@ const pagination = combineReducers({
     ]
   }),
   stargazersByRepo: paginate({
-    mapActionToKey: action => action.fullName,
+    mapActionToKey: ({fullName}) => fullName,
     types: [
       ActionTypes.STARGAZERS_REQUEST,
       ActionTypes.STARGAZERS_SUCCESS,

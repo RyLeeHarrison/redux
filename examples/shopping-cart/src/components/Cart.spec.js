@@ -13,13 +13,13 @@ const setup = (total, products = []) => {
   )
 
   return {
-    component: component,
-    actions: actions,
+    component,
+    actions,
     button: component.find('button'),
     products: component.find(Product),
     em: component.find('em'),
     p: component.find('p')
-  }
+  };
 }
 
 describe('Cart component', () => {

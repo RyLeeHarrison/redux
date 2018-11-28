@@ -30,7 +30,7 @@ for (const dir of exampleDirs) {
 
     let result = {}
     if (process.platform === 'win32') {
-      result = spawnSync(cmdArg.cmd + '.cmd', cmdArg.args, opts)
+      result = spawnSync(`${cmdArg.cmd}.cmd`, cmdArg.args, opts)
     } else {
       result = spawnSync(cmdArg.cmd, cmdArg.args, opts)
     }

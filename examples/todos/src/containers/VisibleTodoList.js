@@ -8,16 +8,16 @@ const getVisibleTodos = (todos, filter) => {
     case VisibilityFilters.SHOW_ALL:
       return todos
     case VisibilityFilters.SHOW_COMPLETED:
-      return todos.filter(t => t.completed)
+      return todos.filter(({completed}) => completed);
     case VisibilityFilters.SHOW_ACTIVE:
-      return todos.filter(t => !t.completed)
+      return todos.filter(({completed}) => !completed);
     default:
-      throw new Error('Unknown filter: ' + filter)
+      throw new Error(`Unknown filter: ${filter}`)
   }
 }
 
-const mapStateToProps = state => ({
-  todos: getVisibleTodos(state.todos, state.visibilityFilter)
+const mapStateToProps = ({todos, visibilityFilter}) => ({
+  todos: getVisibleTodos(todos, visibilityFilter)
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,11 +1,11 @@
 import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE } from '../actions'
 
-const childIds = (state, action) => {
-  switch (action.type) {
+const childIds = (state, {type, childId}) => {
+  switch (type) {
     case ADD_CHILD:
-      return [ ...state, action.childId ]
+      return [ ...state, childId ];
     case REMOVE_CHILD:
-      return state.filter(id => id !== action.childId)
+      return state.filter(id => id !== childId);
     default:
       return state
   }
